@@ -1,13 +1,13 @@
-import 'package:daggerheart_beyond/data/data_sources/firebase_auth_service.dart';
+import 'package:daggerheart_beyond/data/data_sources/firebase_auth_data_source.dart';
 import 'package:daggerheart_beyond/domain/entities/user_entity.dart';
 import 'package:daggerheart_beyond/domain/errors.dart';
 import 'package:daggerheart_beyond/domain/repositories/auth_repository.dart';
 import 'package:firebase_auth/firebase_auth.dart';
 
 class AuthRepository implements IAuthRepository {
-  final FirebaseAuthService _service;
+  final FirebaseAuthDataSource _dataSource;
 
-  AuthRepository(this._service);
+  AuthRepository(this._dataSource);
 
   @override
   Future<UserEntity> signUp(
@@ -16,17 +16,15 @@ class AuthRepository implements IAuthRepository {
     String password,
   ) async {
     try {
-      final userCredential = await _service.createAccount(
+      final userCredential = await _dataSource.createAccount(
         email: email,
         password: password,
         username: username,
       );
-      // TODO: Add username to created user
-      // TODO: Map UserCredential to UserEntity
       return UserEntity(
-        id: userCredential.user!.uid, // TODO: Ensure user is not null
-        email: email,
-        username: username,
+        id: userCredential.user!.uid,
+        email: userCredential.user!.email ?? '',
+        username: userCredential.user!.displayName ?? '',
       );
     } on FirebaseException catch (e) {
       throw DHBFailureSignUpWithEmailAndPassword.fromCode(e.code);
@@ -38,16 +36,14 @@ class AuthRepository implements IAuthRepository {
   @override
   Future<UserEntity> signIn(String email, String password) async {
     try {
-      final userCredential = await _service.signIn(
+      final userCredential = await _dataSource.signIn(
         email: email,
         password: password,
       );
       return UserEntity(
-        id: userCredential.user!.uid, // TODO: Ensure user is not null
-        email: email,
-        username:
-            userCredential.user!.displayName ??
-            '', // TODO: Handle displayName properly
+        id: userCredential.user!.uid,
+        email: userCredential.user!.email ?? '',
+        username: userCredential.user!.displayName ?? '',
       );
     } on FirebaseException catch (e) {
       throw DHBFailureSignInWithEmailAndPassword.fromCode(e.code);
@@ -59,7 +55,7 @@ class AuthRepository implements IAuthRepository {
   @override
   Future<void> signOut() async {
     try {
-      await _service.signOut();
+      await _dataSource.signOut();
     } catch (e) {
       throw Exception('Failed to sign out: ${e.toString()}');
     }

@@ -1,5 +1,5 @@
+import 'package:daggerheart_beyond/data/data_sources/firebase_auth_data_source.dart';
 import 'package:daggerheart_beyond/data/repositories/auth_repository.dart';
-import 'package:daggerheart_beyond/data/data_sources/firebase_auth_service.dart';
 import 'package:daggerheart_beyond/domain/repositories/auth_repository.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
@@ -9,7 +9,7 @@ import 'package:daggerheart_beyond/presentation/features/auth/sign_in_view.dart'
 class DaggerheartBeyondApp extends StatelessWidget {
   DaggerheartBeyondApp({super.key});
 
-  final _authRespository = AuthRepository(FirebaseAuthService());
+  final _authRespository = AuthRepository(FirebaseAuthDataSource());
 
   @override
   Widget build(BuildContext context) {

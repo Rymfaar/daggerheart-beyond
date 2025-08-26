@@ -1,6 +1,6 @@
 import 'package:firebase_auth/firebase_auth.dart';
 
-class FirebaseAuthSource {
+class FirebaseAuthDataSource {
   FirebaseAuth firebase = FirebaseAuth.instance;
 
   Future<UserCredential> createAccount({
