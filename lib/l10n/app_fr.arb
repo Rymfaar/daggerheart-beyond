@@ -1,0 +1,14 @@
+{
+    "@@locale": "fr",
+    "language": "Français",
+    "auth": "AUTHENTIFICATION",
+    "auth_signIn": "S'inscrire",
+    "auth_logIn": "Se connecter",
+    "auth_email": "Email",
+    "auth_password": "Mot de passe",
+    "auth_confirmPassword": "Confirmer mot de passe",
+    "auth_noEmailError": "Veuillez entrer votre email",
+    "auth_invalidEmailError": "Veuillez entrer un email valide",
+    "auth_noPasswordError": "Veuillez entrer votre mot de passe",
+    "auth_shortPasswordError": "Votre mot de passe doit contenir au moins 6 caractères"
+}

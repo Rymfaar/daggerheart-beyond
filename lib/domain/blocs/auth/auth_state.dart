@@ -5,7 +5,12 @@ sealed class AuthState extends Equatable {
   List<Object?> get props => [];
 }
 
-class AuthSignedOut extends AuthState {}
+//* Initial state
+class AuthLogIn extends AuthState {}
+
+class AuthSignIn extends AuthState {}
+
+class AuthLoading extends AuthState {}
 
 class AuthError extends AuthState {
   final Exception exception;
@@ -15,8 +20,6 @@ class AuthError extends AuthState {
   @override
   List<Object?> get props => [exception];
 }
-
-class AuthLoading extends AuthState {}
 
 class AuthSignedIn extends AuthState {
   final UserEntity user;

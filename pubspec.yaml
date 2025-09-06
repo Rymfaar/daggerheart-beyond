@@ -1,6 +1,6 @@
 name: daggerheart_beyond
 description: "A new Flutter project."
-publish_to: 'none' # Remove this line if you wish to publish to pub.dev
+publish_to: 'none'
 
 version: 1.0.0+1
 
@@ -10,35 +10,26 @@ environment:
 dependencies:
   flutter:
     sdk: flutter
-
-  # The following adds the Cupertino Icons font to your application.
-  # Use with the CupertinoIcons class for iOS style icons.
+  flutter_localizations:
+    sdk: flutter
   cupertino_icons: ^1.0.8
   dio: ^5.8.0+1
   intl: ^0.20.2
   sqflite: ^2.4.2
+  equatable: ^2.0.7
   flutter_bloc: ^7.0.0
   firebase_core: ^4.0.0
   firebase_auth: ^6.0.1
-  equatable: ^2.0.7
+  shared_preferences: ^2.5.3
 
 dev_dependencies:
   flutter_test:
     sdk: flutter
   mockito: ^5.5.0
-  build_runner: ^2.7.0
   freezed: ^3.2.0
-
-  # The "flutter_lints" package below contains a set of recommended lints to
-  # encourage good coding practices. The lint set provided by the package is
-  # activated in the `analysis_options.yaml` file located at the root of your
-  # package. See that file for information about deactivating specific lint
-  # rules and activating additional ones.
+  build_runner: ^2.7.0
   flutter_lints: ^5.0.0
 
 flutter:
-
-  # The following line ensures that the Material Icons font is
-  # included with your application, so that you can use the icons in
-  # the material Icons class.
   uses-material-design: true
+  generate: true

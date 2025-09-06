@@ -1,5 +1,3 @@
-import 'dart:math';
-
 import 'package:flutter_test/flutter_test.dart';
 import 'package:mockito/annotations.dart';
 import 'package:mockito/mockito.dart';
@@ -29,7 +27,7 @@ void main() {
   });
 
   group("signIn", () {
-    test('succeeds when data source succeeds', () async {
+    test('get user entity when data source succeeds', () async {
       final expectedUser = UserEntity(
         id: MockUserData.id,
         email: MockUserData.email,
@@ -60,7 +58,7 @@ void main() {
       expect(result, expectedUser);
     });
 
-    test('fails when data source fails', () {
+    test('throws when data source fails', () {
       final result = authRepository.signIn(
         MockUserData.email,
         MockUserData.password,
