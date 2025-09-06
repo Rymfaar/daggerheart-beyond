@@ -87,7 +87,7 @@ class MockFirebaseAuthDataSource extends _i1.Mock
           as _i4.Future<_i2.UserCredential>);
 
   @override
-  _i4.Future<_i2.UserCredential> signIn({
+  _i4.Future<_i2.UserCredential> logIn({
     required String? email,
     required String? password,
   }) =>

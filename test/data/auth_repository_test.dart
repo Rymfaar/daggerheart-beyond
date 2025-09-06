@@ -35,19 +35,19 @@ void main() {
       );
 
       when(
-        mockFirebaseAuthDataSource.signIn(
+        mockFirebaseAuthDataSource.logIn(
           email: MockUserData.email,
           password: MockUserData.password,
         ),
       ).thenAnswer((_) async => mockUserCredential);
 
-      final result = await authRepository.signIn(
+      final result = await authRepository.logIn(
         MockUserData.email,
         MockUserData.password,
       );
 
       verify(
-        mockFirebaseAuthDataSource.signIn(
+        mockFirebaseAuthDataSource.logIn(
           email: MockUserData.email,
           password: MockUserData.password,
         ),
@@ -59,13 +59,13 @@ void main() {
     });
 
     test('throws when data source fails', () {
-      final result = authRepository.signIn(
+      final result = authRepository.logIn(
         MockUserData.email,
         MockUserData.password,
       );
 
       when(
-        mockFirebaseAuthDataSource.signIn(
+        mockFirebaseAuthDataSource.logIn(
           email: MockUserData.email,
           password: MockUserData.password,
         ),

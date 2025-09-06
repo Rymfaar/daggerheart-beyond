@@ -104,17 +104,23 @@ abstract class AppLocalizations {
   /// **'English'**
   String get language;
 
+  /// No description provided for @genericError.
+  ///
+  /// In en, this message translates to:
+  /// **'Sorry, an error occurred. Please try again.'**
+  String get genericError;
+
   /// No description provided for @auth.
   ///
   /// In en, this message translates to:
   /// **'AUTHENTICATION'**
   String get auth;
 
-  /// No description provided for @auth_signIn.
+  /// No description provided for @auth_signUp.
   ///
   /// In en, this message translates to:
-  /// **'Sign in'**
-  String get auth_signIn;
+  /// **'Sign up'**
+  String get auth_signUp;
 
   /// No description provided for @auth_logIn.
   ///
@@ -163,6 +169,24 @@ abstract class AppLocalizations {
   /// In en, this message translates to:
   /// **'Password must be at least 6 characters'**
   String get auth_shortPasswordError;
+
+  /// No description provided for @auth_notMatchingPasswordError.
+  ///
+  /// In en, this message translates to:
+  /// **'Passwords do not match'**
+  String get auth_notMatchingPasswordError;
+
+  /// No description provided for @auth_userHasAccount.
+  ///
+  /// In en, this message translates to:
+  /// **'Already have an account?'**
+  String get auth_userHasAccount;
+
+  /// No description provided for @auth_userHasNoAccount.
+  ///
+  /// In en, this message translates to:
+  /// **'Don\'t have an account?'**
+  String get auth_userHasNoAccount;
 }
 
 class _AppLocalizationsDelegate

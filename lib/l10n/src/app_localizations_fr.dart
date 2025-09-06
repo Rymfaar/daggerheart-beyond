@@ -12,10 +12,14 @@ class AppLocalizationsFr extends AppLocalizations {
   String get language => 'Français';
 
   @override
+  String get genericError =>
+      'Désolé, une erreur est survenue. Veuillez réessayer.';
+
+  @override
   String get auth => 'AUTHENTIFICATION';
 
   @override
-  String get auth_signIn => 'S\'inscrire';
+  String get auth_signUp => 'S\'inscrire';
 
   @override
   String get auth_logIn => 'Se connecter';
@@ -41,4 +45,14 @@ class AppLocalizationsFr extends AppLocalizations {
   @override
   String get auth_shortPasswordError =>
       'Votre mot de passe doit contenir au moins 6 caractères';
+
+  @override
+  String get auth_notMatchingPasswordError =>
+      'Les mots de passe ne correspondent pas';
+
+  @override
+  String get auth_userHasAccount => 'Vous avez déjà un compte ?';
+
+  @override
+  String get auth_userHasNoAccount => 'Vous n\'avez pas de compte ?';
 }

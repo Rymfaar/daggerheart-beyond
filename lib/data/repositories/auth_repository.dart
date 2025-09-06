@@ -34,9 +34,9 @@ class AuthRepository implements IAuthRepository {
   }
 
   @override
-  Future<UserEntity> signIn(String email, String password) async {
+  Future<UserEntity> logIn(String email, String password) async {
     try {
-      final userCredential = await _dataSource.signIn(
+      final userCredential = await _dataSource.logIn(
         email: email,
         password: password,
       );

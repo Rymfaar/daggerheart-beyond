@@ -12,7 +12,9 @@ class AuthView extends StatefulWidget {
 }
 
 class _AuthViewState extends State<AuthView> {
-  final _formKey = GlobalKey<FormState>();
+  var _userHasAccount = true;
+  final _signUpFormKey = GlobalKey<FormState>();
+  final _logInFormKey = GlobalKey<FormState>();
   final _emailController = TextEditingController();
   final _usernameController = TextEditingController();
   final _passwordController = TextEditingController();
@@ -39,14 +41,11 @@ class _AuthViewState extends State<AuthView> {
     return null;
   }
 
-  void _onSignInPressed(BuildContext context) {
-    print("SignIn button pressed");
-    final isFormValid = _formKey.currentState?.validate() ?? false;
-    print("Form valid: $isFormValid");
+  void _onSignUpPressed(BuildContext context) {
+    final isFormValid = _signUpFormKey.currentState?.validate() ?? false;
     final password = _passwordController.text;
     final passwordConfirm = _passwordConfirmController.text;
     final arePasswordsMatching = password == passwordConfirm;
-    print("Passwords matching: $arePasswordsMatching");
     if (isFormValid && arePasswordsMatching) {
       context.read<AuthBloc>().add(
         CreateAccountPressed(
@@ -58,86 +57,175 @@ class _AuthViewState extends State<AuthView> {
     }
   }
 
-  Widget _buildSignIn() {
-    return Form(
-      key: _formKey,
-      child: Column(
-        mainAxisSize: MainAxisSize.min,
-        children: [
-          Spacings.verticalMd,
-          TextFormField(
-            controller: _emailController,
-            decoration: InputDecoration(
-              labelText: AppLocalizations.of(context)!.auth_email,
-              border: OutlineInputBorder(),
-            ),
-            keyboardType: TextInputType.emailAddress,
-            validator: (value) => _validateEmail(value),
-          ),
-          Spacings.verticalMd,
-          TextFormField(
-            controller: _passwordController,
-            decoration: InputDecoration(
-              labelText: AppLocalizations.of(context)!.auth_password,
-              border: OutlineInputBorder(),
-            ),
-            validator: (value) => _validatePassword(value),
-          ),
-          Spacings.verticalMd,
-          TextFormField(
-            controller: _passwordConfirmController,
-            decoration: InputDecoration(
-              labelText: AppLocalizations.of(context)!.auth_confirmPassword,
-              border: OutlineInputBorder(),
-            ),
-            validator: (value) => _validatePassword(value),
-          ),
-          Spacings.verticalMd,
-          BlocBuilder<AuthBloc, AuthState>(
-            builder: (context, state) {
-              final isLoading = state is AuthLoading;
-              return SizedBox(
-                width: double.infinity,
-                child: ElevatedButton(
-                  onPressed: isLoading ? null : () => _onSignInPressed(context),
-                  child: isLoading
-                      ? const SizedBox(
-                          width: 24,
-                          height: 24,
-                          child: CircularProgressIndicator(
-                            color: Colors.white,
-                            strokeWidth: 2,
-                          ),
-                        )
-                      : Text(AppLocalizations.of(context)!.auth_signIn),
+  void _onLogInPressed(BuildContext context) {
+    final isFormValid = _logInFormKey.currentState?.validate() ?? false;
+    if (isFormValid) {
+      context.read<AuthBloc>().add(
+        LogInPressed(
+          email: _emailController.text,
+          password: _passwordController.text,
+        ),
+      );
+    }
+  }
+
+  Widget _buildSignUp() {
+    return Column(
+      crossAxisAlignment: CrossAxisAlignment.center,
+      children: [
+        Form(
+          key: _signUpFormKey,
+          child: Column(
+            children: [
+              Spacings.verticalMd,
+              TextFormField(
+                controller: _emailController,
+                decoration: InputDecoration(
+                  labelText: AppLocalizations.of(context)!.auth_email,
+                  border: OutlineInputBorder(),
                 ),
-              );
-            },
+                keyboardType: TextInputType.emailAddress,
+                validator: (value) => _validateEmail(value),
+              ),
+              Spacings.verticalMd,
+              TextFormField(
+                controller: _passwordController,
+                decoration: InputDecoration(
+                  labelText: AppLocalizations.of(context)!.auth_password,
+                  border: OutlineInputBorder(),
+                ),
+                validator: (value) => _validatePassword(value),
+              ),
+              Spacings.verticalMd,
+              TextFormField(
+                controller: _passwordConfirmController,
+                decoration: InputDecoration(
+                  labelText: AppLocalizations.of(context)!.auth_confirmPassword,
+                  border: OutlineInputBorder(),
+                ),
+                validator: (value) => _validatePassword(value),
+              ),
+              Spacings.verticalMd,
+              BlocBuilder<AuthBloc, AuthState>(
+                builder: (context, state) {
+                  final isLoading = state is AuthLoading;
+                  return SizedBox(
+                    width: double.infinity,
+                    child: ElevatedButton(
+                      onPressed: isLoading
+                          ? null
+                          : () => _onSignUpPressed(context),
+                      child: isLoading
+                          ? const SizedBox(
+                              width: 24,
+                              height: 24,
+                              child: CircularProgressIndicator(
+                                color: Colors.white,
+                                strokeWidth: 2,
+                              ),
+                            )
+                          : Text(AppLocalizations.of(context)!.auth_signUp),
+                    ),
+                  );
+                },
+              ),
+            ],
           ),
-        ],
-      ),
+        ),
+        Row(
+          children: [
+            Text(AppLocalizations.of(context)!.auth_userHasAccount),
+            TextButton(
+              onPressed: () {
+                setState(() {
+                  _userHasAccount = !_userHasAccount;
+                });
+              },
+              child: Text(AppLocalizations.of(context)!.auth_logIn),
+            ),
+          ],
+        ),
+      ],
+    );
+  }
+
+  Widget _buildLogIn() {
+    return Column(
+      children: [
+        Form(
+          key: _logInFormKey,
+          child: Column(
+            children: [
+              Spacings.verticalMd,
+              TextFormField(
+                controller: _emailController,
+                decoration: InputDecoration(
+                  labelText: AppLocalizations.of(context)!.auth_email,
+                  border: OutlineInputBorder(),
+                ),
+                keyboardType: TextInputType.emailAddress,
+                validator: (value) => _validateEmail(value),
+              ),
+              Spacings.verticalMd,
+              TextFormField(
+                controller: _passwordController,
+                decoration: InputDecoration(
+                  labelText: AppLocalizations.of(context)!.auth_password,
+                  border: OutlineInputBorder(),
+                ),
+              ),
+            ],
+          ),
+        ),
+        Spacings.verticalMd,
+        BlocBuilder<AuthBloc, AuthState>(
+          builder: (context, state) {
+            final isLoading = state is AuthLoading;
+            return SizedBox(
+              width: double.infinity,
+              child: ElevatedButton(
+                onPressed: isLoading ? null : () => _onLogInPressed(context),
+                child: isLoading
+                    ? const SizedBox(
+                        width: 24,
+                        height: 24,
+                        child: CircularProgressIndicator(
+                          color: Colors.white,
+                          strokeWidth: 2,
+                        ),
+                      )
+                    : Text(AppLocalizations.of(context)!.auth_logIn),
+              ),
+            );
+          },
+        ),
+        Spacings.verticalMd,
+        Row(
+          children: [
+            Text(AppLocalizations.of(context)!.auth_userHasNoAccount),
+            TextButton(
+              onPressed: () {
+                setState(() {
+                  _userHasAccount = !_userHasAccount;
+                });
+              },
+              child: Text(AppLocalizations.of(context)!.auth_signUp),
+            ),
+          ],
+        ),
+      ],
     );
   }
 
   @override
   Widget build(BuildContext context) {
-    //! UNSIGNED, Sign-in
-    //* username field
-    //* password confirm field
-    //* sign in button
-    //* go to sign in button
-    //! UNSIGNED, Log-in
-    //* username / email field
-    //* password field
-    //* sign in button
-    //* go to sign ip button
     return Scaffold(
       appBar: AppBar(title: const Text('Authentication')),
       body: BlocListener<AuthBloc, AuthState>(
         listener: (context, state) {},
         child: SingleChildScrollView(
           padding: const EdgeInsets.only(left: Spacings.md, right: Spacings.md),
-          child: _buildSignIn(),
+          child: _userHasAccount ? _buildLogIn() : _buildSignUp(),
         ),
       ),
     );

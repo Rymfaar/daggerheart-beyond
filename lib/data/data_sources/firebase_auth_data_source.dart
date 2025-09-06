@@ -13,7 +13,7 @@ class FirebaseAuthDataSource {
     return userCredential;
   }
 
-  Future<UserCredential> signIn({
+  Future<UserCredential> logIn({
     required String email,
     required String password,
   }) async {

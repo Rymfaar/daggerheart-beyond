@@ -12,10 +12,13 @@ class AppLocalizationsEn extends AppLocalizations {
   String get language => 'English';
 
   @override
+  String get genericError => 'Sorry, an error occurred. Please try again.';
+
+  @override
   String get auth => 'AUTHENTICATION';
 
   @override
-  String get auth_signIn => 'Sign in';
+  String get auth_signUp => 'Sign up';
 
   @override
   String get auth_logIn => 'Log in';
@@ -41,4 +44,13 @@ class AppLocalizationsEn extends AppLocalizations {
   @override
   String get auth_shortPasswordError =>
       'Password must be at least 6 characters';
+
+  @override
+  String get auth_notMatchingPasswordError => 'Passwords do not match';
+
+  @override
+  String get auth_userHasAccount => 'Already have an account?';
+
+  @override
+  String get auth_userHasNoAccount => 'Don\'t have an account?';
 }
