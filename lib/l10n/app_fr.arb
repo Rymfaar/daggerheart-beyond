@@ -5,14 +5,22 @@
     "auth": "AUTHENTIFICATION",
     "auth_signUp": "S'inscrire",
     "auth_logIn": "Se connecter",
+    "auth_logOut": "Se déconnecter",
     "auth_email": "Email",
+    "auth_username": "Nom d'utilisateur",
     "auth_password": "Mot de passe",
     "auth_confirmPassword": "Confirmer mot de passe",
     "auth_noEmailError": "Veuillez entrer votre email",
+    "auth_noUsernameError": "Veuillez entrer votre nom d'utilisateur",
+    "auth_shortUsernameError": "Le nom d'utilisateur doit contenir au moins 3 caractères",
+    "auth_wrongCharacterUsernameError": "Le nom d'utilisateur ne peut contenir que des lettres, des chiffres, des underscores ou des points",
+    "auth_spaceUsernameError": "Le nom d'utilisateur ne peut pas contenir d'espaces",
     "auth_invalidEmailError": "Veuillez entrer un email valide",
     "auth_noPasswordError": "Veuillez entrer votre mot de passe",
     "auth_shortPasswordError": "Votre mot de passe doit contenir au moins 6 caractères",
     "auth_notMatchingPasswordError": "Les mots de passe ne correspondent pas",
     "auth_userHasAccount": "Vous avez déjà un compte ?",
-    "auth_userHasNoAccount": "Vous n'avez pas de compte ?"
+    "auth_userHasNoAccount": "Vous n'avez pas de compte ?",
+    "home": "HOME",
+    "home_title": "Daggerheart Beyond"
 }

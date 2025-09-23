@@ -2,7 +2,7 @@
 
 //* AUTHENTICATION EXCEPTIONS
 
-class ErrorCode {
+class FirebaseAuthError {
   static const String invalidEmail = 'invalid-email';
   static const String userDisabled = 'user-disabled';
   static const String emailAlreadyInUse = 'email-already-in-use';
@@ -21,23 +21,23 @@ class DHBFailureSignUpWithEmailAndPassword implements Exception {
 
   factory DHBFailureSignUpWithEmailAndPassword.fromCode(String code) {
     switch (code) {
-      case ErrorCode.invalidEmail:
+      case FirebaseAuthError.invalidEmail:
         return const DHBFailureSignUpWithEmailAndPassword(
           'Email is not valid or badly formatted.',
         );
-      case ErrorCode.userDisabled:
+      case FirebaseAuthError.userDisabled:
         return const DHBFailureSignUpWithEmailAndPassword(
           'This user has been disabled. Please contact support for help.',
         );
-      case ErrorCode.emailAlreadyInUse:
+      case FirebaseAuthError.emailAlreadyInUse:
         return const DHBFailureSignUpWithEmailAndPassword(
           'An account already exists for that email.',
         );
-      case ErrorCode.operationNotAllowed:
+      case FirebaseAuthError.operationNotAllowed:
         return const DHBFailureSignUpWithEmailAndPassword(
           'Operation is not allowed. Please contact support.',
         );
-      case ErrorCode.weakPassword:
+      case FirebaseAuthError.weakPassword:
         return const DHBFailureSignUpWithEmailAndPassword(
           'Please enter a stronger password.',
         );
@@ -56,19 +56,19 @@ class DHBFailureSignInWithEmailAndPassword implements Exception {
 
   factory DHBFailureSignInWithEmailAndPassword.fromCode(String code) {
     switch (code) {
-      case ErrorCode.invalidEmail:
+      case FirebaseAuthError.invalidEmail:
         return const DHBFailureSignInWithEmailAndPassword(
           'Email is not valid or badly formatted.',
         );
-      case ErrorCode.userDisabled:
+      case FirebaseAuthError.userDisabled:
         return const DHBFailureSignInWithEmailAndPassword(
           'This user has been disabled. Please contact support for help.',
         );
-      case ErrorCode.userNotFound:
+      case FirebaseAuthError.userNotFound:
         return const DHBFailureSignInWithEmailAndPassword(
           'Email is not found, please create an account.',
         );
-      case ErrorCode.wrongPassword:
+      case FirebaseAuthError.wrongPassword:
         return const DHBFailureSignInWithEmailAndPassword(
           'Incorrect password, please try again.',
         );
@@ -78,5 +78,32 @@ class DHBFailureSignInWithEmailAndPassword implements Exception {
   }
 }
 
-class DHBFailureLogOut implements Exception {}
+//! USER ERRORS
 
+enum FirebaseFirestore {
+  unknown,
+  failedToCreateDocuement,
+  noDocumentAfterCreation,
+}
+
+class DHBFailureUserData implements Exception {
+  final String message;
+
+  const DHBFailureUserData([
+    this.message = 'An error occurred. Please try again later.',
+  ]);
+
+  factory DHBFailureUserData.fromCode(FirebaseFirestore code) {
+    switch (code) {
+      case FirebaseFirestore.noDocumentAfterCreation:
+        return const DHBFailureUserData(
+          'User document does not exist after creation.',
+        );
+      case FirebaseFirestore.failedToCreateDocuement:
+        return const DHBFailureUserData('Failed to create user.');
+      case FirebaseFirestore.unknown:
+        // TODO: Handle this case.
+        throw UnimplementedError();
+    }
+  }
+}

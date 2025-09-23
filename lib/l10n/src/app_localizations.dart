@@ -128,11 +128,23 @@ abstract class AppLocalizations {
   /// **'Log in'**
   String get auth_logIn;
 
+  /// No description provided for @auth_logOut.
+  ///
+  /// In en, this message translates to:
+  /// **'Log out'**
+  String get auth_logOut;
+
   /// No description provided for @auth_email.
   ///
   /// In en, this message translates to:
   /// **'Email'**
   String get auth_email;
+
+  /// No description provided for @auth_username.
+  ///
+  /// In en, this message translates to:
+  /// **'Username'**
+  String get auth_username;
 
   /// No description provided for @auth_password.
   ///
@@ -151,6 +163,30 @@ abstract class AppLocalizations {
   /// In en, this message translates to:
   /// **'Please enter your email'**
   String get auth_noEmailError;
+
+  /// No description provided for @auth_noUsernameError.
+  ///
+  /// In en, this message translates to:
+  /// **'Please enter your username'**
+  String get auth_noUsernameError;
+
+  /// No description provided for @auth_shortUsernameError.
+  ///
+  /// In en, this message translates to:
+  /// **'Username must be at least 3 characters'**
+  String get auth_shortUsernameError;
+
+  /// No description provided for @auth_wrongCharacterUsernameError.
+  ///
+  /// In en, this message translates to:
+  /// **'Username must only contain letters, numbers, underscores or dots'**
+  String get auth_wrongCharacterUsernameError;
+
+  /// No description provided for @auth_spaceUsernameError.
+  ///
+  /// In en, this message translates to:
+  /// **'Username cannot contain spaces'**
+  String get auth_spaceUsernameError;
 
   /// No description provided for @auth_invalidEmailError.
   ///
@@ -187,6 +223,18 @@ abstract class AppLocalizations {
   /// In en, this message translates to:
   /// **'Don\'t have an account?'**
   String get auth_userHasNoAccount;
+
+  /// No description provided for @home.
+  ///
+  /// In en, this message translates to:
+  /// **'HOME'**
+  String get home;
+
+  /// No description provided for @home_title.
+  ///
+  /// In en, this message translates to:
+  /// **'Daggerheart Beyond'**
+  String get home_title;
 }
 
 class _AppLocalizationsDelegate

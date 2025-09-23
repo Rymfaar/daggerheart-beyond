@@ -92,14 +92,11 @@ class MockFirebaseAuthDataSource extends _i1.Mock
     required String? password,
   }) =>
       (super.noSuchMethod(
-            Invocation.method(#signIn, [], {
-              #email: email,
-              #password: password,
-            }),
+            Invocation.method(#logIn, [], {#email: email, #password: password}),
             returnValue: _i4.Future<_i2.UserCredential>.value(
               _FakeUserCredential_1(
                 this,
-                Invocation.method(#signIn, [], {
+                Invocation.method(#logIn, [], {
                   #email: email,
                   #password: password,
                 }),

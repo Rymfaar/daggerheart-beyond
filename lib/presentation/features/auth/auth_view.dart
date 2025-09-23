@@ -1,4 +1,4 @@
-import 'package:daggerheart_beyond/domain/blocs/auth/auth.dart';
+import 'package:daggerheart_beyond/presentation/blocs/auth/auth.dart';
 import 'package:daggerheart_beyond/l10n/src/app_localizations.dart';
 import 'package:daggerheart_beyond/style/style.dart';
 import 'package:flutter/material.dart';
@@ -27,6 +27,23 @@ class _AuthViewState extends State<AuthView> {
     final emailRegex = RegExp(r'^[^@]+@[^@]+\.[^@]+');
     if (!emailRegex.hasMatch(value)) {
       return AppLocalizations.of(context)!.auth_invalidEmailError;
+    }
+    return null;
+  }
+
+  String? _validateUsername(String? value) {
+    if (value == null || value.isEmpty) {
+      return AppLocalizations.of(context)!.auth_noUsernameError;
+    }
+    if (value.length < 3) {
+      return AppLocalizations.of(context)!.auth_shortUsernameError;
+    }
+    final usernameRegExp = RegExp(r'^[a-zA-Z0-9._]+$');
+    if (!usernameRegExp.hasMatch(value)) {
+      return AppLocalizations.of(context)!.auth_wrongCharacterUsernameError;
+    }
+    if (value.contains(' ')) {
+      return AppLocalizations.of(context)!.auth_spaceUsernameError;
     }
     return null;
   }
@@ -86,6 +103,15 @@ class _AuthViewState extends State<AuthView> {
                 ),
                 keyboardType: TextInputType.emailAddress,
                 validator: (value) => _validateEmail(value),
+              ),
+              Spacings.verticalMd,
+              TextFormField(
+                controller: _usernameController,
+                decoration: InputDecoration(
+                  labelText: AppLocalizations.of(context)!.auth_username,
+                  border: OutlineInputBorder(),
+                ),
+                validator: (value) => _validateUsername(value),
               ),
               Spacings.verticalMd,
               TextFormField(
@@ -222,7 +248,17 @@ class _AuthViewState extends State<AuthView> {
     return Scaffold(
       appBar: AppBar(title: const Text('Authentication')),
       body: BlocListener<AuthBloc, AuthState>(
-        listener: (context, state) {},
+        listener: (context, state) {
+          if (state is AuthLoggedIn) {
+            Navigator.of(context).pushReplacementNamed('/home');
+          } else if (state is AuthError) {
+            final snackBar = SnackBar(
+              content: Text(state.exception.toString()),
+              backgroundColor: Colors.red,
+            );
+            ScaffoldMessenger.of(context).showSnackBar(snackBar);
+          }
+        },
         child: SingleChildScrollView(
           padding: const EdgeInsets.only(left: Spacings.md, right: Spacings.md),
           child: _userHasAccount ? _buildLogIn() : _buildSignUp(),

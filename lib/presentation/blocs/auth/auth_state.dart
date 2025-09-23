@@ -1,5 +1,6 @@
 part of 'auth_bloc.dart';
 
+// TODO: Cubit?
 sealed class AuthState extends Equatable {
   @override
   List<Object?> get props => [];

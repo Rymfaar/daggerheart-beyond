@@ -5,14 +5,22 @@
     "auth": "AUTHENTICATION",
     "auth_signUp": "Sign up",
     "auth_logIn": "Log in",
+    "auth_logOut": "Log out",
     "auth_email": "Email",
+    "auth_username": "Username",
     "auth_password": "Password",
     "auth_confirmPassword": "Confirm password",
     "auth_noEmailError": "Please enter your email",
+    "auth_noUsernameError": "Please enter your username",
+    "auth_shortUsernameError": "Username must be at least 3 characters",
+    "auth_wrongCharacterUsernameError": "Username must only contain letters, numbers, underscores or dots",
+    "auth_spaceUsernameError": "Username cannot contain spaces",
     "auth_invalidEmailError": "Please enter a valid email",
     "auth_noPasswordError": "Please enter your password",
     "auth_shortPasswordError": "Password must be at least 6 characters",
     "auth_notMatchingPasswordError": "Passwords do not match",
     "auth_userHasAccount": "Already have an account?",
-    "auth_userHasNoAccount": "Don't have an account?"
+    "auth_userHasNoAccount": "Don't have an account?",
+    "home": "HOME",
+    "home_title": "Daggerheart Beyond"
 }

@@ -24,7 +24,13 @@ class AppLocalizationsEn extends AppLocalizations {
   String get auth_logIn => 'Log in';
 
   @override
+  String get auth_logOut => 'Log out';
+
+  @override
   String get auth_email => 'Email';
+
+  @override
+  String get auth_username => 'Username';
 
   @override
   String get auth_password => 'Password';
@@ -34,6 +40,20 @@ class AppLocalizationsEn extends AppLocalizations {
 
   @override
   String get auth_noEmailError => 'Please enter your email';
+
+  @override
+  String get auth_noUsernameError => 'Please enter your username';
+
+  @override
+  String get auth_shortUsernameError =>
+      'Username must be at least 3 characters';
+
+  @override
+  String get auth_wrongCharacterUsernameError =>
+      'Username must only contain letters, numbers, underscores or dots';
+
+  @override
+  String get auth_spaceUsernameError => 'Username cannot contain spaces';
 
   @override
   String get auth_invalidEmailError => 'Please enter a valid email';
@@ -53,4 +73,10 @@ class AppLocalizationsEn extends AppLocalizations {
 
   @override
   String get auth_userHasNoAccount => 'Don\'t have an account?';
+
+  @override
+  String get home => 'HOME';
+
+  @override
+  String get home_title => 'Daggerheart Beyond';
 }
